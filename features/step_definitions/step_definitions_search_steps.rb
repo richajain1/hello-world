@@ -1,3 +1,5 @@
+#scenario 1
+
 When(/^I visit the Dominos home page$/) do
   visit('https://order.dominos.com/en/')
 end
@@ -5,3 +7,40 @@ end
 Then(/^I should see the Dominos home page$/) do
  expect(page).to have_selector(:id, 'homePage')
 end
+
+When(/^I click the "(.*?)" tab$/) do |tab|
+  click_link('Order Online')
+  sleep 10
+end
+ 
+Then(/^I should see the Dominos Location Search page$/) do
+  expect(page).to have_selector(:id, 'locationsSearchPage')
+  sleep 10
+end
+
+#scenario 2 
+#Given(/^I am on Location search page$/) do
+#expect(page).to have_selector(:id, 'locationsSearchPage')
+#end
+And (/^I select "carryout" option$/) do
+	find('.Carryout').click
+	sleep 5
+end
+
+And(/^I fill out Address Information form$/) do
+select('House', from: 'Address_Type_Select')
+fill_in('Street', with: '43040 Tavernsprings ct')
+fill_in('City', with: 'Ashburn')
+fill_in('Postal_Code', with: '20147')
+select('VA', from: 'Region')
+end
+
+When(/^I click on continue button$/) do
+	find(:xpath,'/html/body/div[2]/div[1]/div/div/form/div/div[2]/button').click
+	sleep 5
+end
+
+Then (/^I should be on Entrees page$/) do
+	expect(page).to have_selector(:id, 'js-mainSiteNavigation')
+end
+
