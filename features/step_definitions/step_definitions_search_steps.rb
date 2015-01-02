@@ -40,7 +40,23 @@ When(/^I click on continue button$/) do
 	sleep 5
 end
 
+Then(/^I should see location Results page$/) do
+	expect(page).to have_selector(:id, 'locationsResultsPage')
+end
+When(/^I click on order-carryout-pickup button$/) do
+	page.all(:link, "Order Carryout / Pickup") [0].click
+end
+
 Then (/^I should be on Entrees page$/) do
 	expect(page).to have_selector(:id, 'js-mainSiteNavigation')
+end
+And(/^I should see "build your own Pizza" option$/) do 
+  expect(page).to have_selector(:id, 'entree-BuildYourOwn')
+end
+When(/^I click on build your pizza option$/) do
+	find(:xpath, '/html/body/div[3]/div[1]/div/div/div[4]/a/div[2]/h2').click
+end
+Then(/^I should see Pizza builder page$/) do
+	expect(page).to have_selector(:id, 'pizzaBuilderPage')
 end
 
