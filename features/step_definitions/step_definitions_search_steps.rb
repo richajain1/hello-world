@@ -54,7 +54,7 @@ And(/^I should see "build your own Pizza" option$/) do
   expect(page).to have_selector(:id, 'entree-BuildYourOwn')
 end
 When(/^I click on build your pizza option$/) do
-	find(:xpath, '/html/body/div[3]/div[1]/div/div/div[4]/a/div[2]/h2').click
+	find(:css, '.media__title').click
 end
 Then(/^I should see Pizza builder page$/) do
 	expect(page).to have_selector(:id, 'pizzaBuilderPage')
